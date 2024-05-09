@@ -117,16 +117,16 @@ function OtpScreen(props) {
                 fieldMeta={formik.getFieldMeta("otpCode")}
               />
 
-              <div
+              {/* <div
                 className="text-center font-weight-bolder cursor-pointer text-center"
                 onClick={() => handleNavigate("/request-to-reset-pass")}
                 style={{ color: AppResource.colors.featureColor }}
               >
                 Forgot password ?
-              </div>
+              </div> */}
 
               {/* sign in button */}
-              <AppButton className="btn-orange w-100 mt-5" text="Login" />
+              <AppButton className="btn-orange w-100 mt-5" text="Send" />
               <div className="text-center mt-5">
                 Don't have an Amity account yet?{" "}
                 <span

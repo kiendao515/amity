@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { thunkSignIn } from "app/authSlice";
 import UserHelper from "general/helpers/UserHelper";
 import axios from "axios";
+import FbLoginButton from "general/components/FbLogin";
 SignInScreen.propTypes = {};
 
 const sTag = "[SignInScreen]";
@@ -32,7 +33,7 @@ function SignInScreen(props) {
     },
     onSubmit: async (values) => {
       const params = { ...values };
-      debugger
+      
       let inputPassword = params.password;
       params.password = Utils.sha256(inputPassword);
       try {
@@ -113,6 +114,7 @@ function SignInScreen(props) {
 
               {/* sign in button */}
               <AppButton className="btn-orange w-100 mt-5" text="Login" />
+              <FbLoginButton />
               <div className="text-center mt-5">
                 Don't have an Amity account yet?{" "}
                 <span
