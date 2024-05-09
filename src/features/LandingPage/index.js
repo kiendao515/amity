@@ -103,7 +103,13 @@ function LandingPage(props) {
                 </div>
                 <div className="col-md-6">
                   <Fade right>
-                    <img className="w-100" src={Web} alt="" />
+                    <img
+                      className="w-100"
+                      src={
+                        "https://st4.depositphotos.com/4218696/25465/i/450/depositphotos_254659898-stock-photo-cute-black-man-and-woman.jpg"
+                      }
+                      alt=""
+                    />
                   </Fade>
                 </div>
               </div>
