@@ -54,8 +54,8 @@ function RequestToResetPass(props) {
                 buttonAddQuestion={false}
             />
             <AuthContent
-                leftTitle="Quên mật khẩu ?"
-                leftDescription="Nhập email của bạn để lấy lại mật khẩu"
+                leftTitle="Forgot password ?"
+                leftDescription="Enter your email to retrieve your password"
                 authImage={AppResource.images.imgForgotPassword}
                 leftElement={
                     <form onSubmit={formik.handleSubmit}>
@@ -64,7 +64,7 @@ function RequestToResetPass(props) {
                             <div>
                                 <BaseTextField
                                     name="email"
-                                    placeholder="Nhập email..."
+                                    placeholder="Enter email..."
                                     fieldHelper={formik.getFieldHelpers(
                                         "email"
                                     )}
@@ -76,7 +76,7 @@ function RequestToResetPass(props) {
                             {/* sumbit button */}
                             <AppButton
                                 className="btn-orange w-100 mt-5"
-                                text="Gửi mã"
+                                text="Send"
                             />
 
                         </div>

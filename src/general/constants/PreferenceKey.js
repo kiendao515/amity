@@ -1,7 +1,7 @@
 // All app preference keys
 const PreferenceKeys = {
     // token
-    accessToken: 'CodeHelper_accessToken',
+    accessToken: 'Amity_accessToken',
     accessTokenExpired: 'accessToken_expired',
     // login info
     savedLoginEmail: 'econtract_saved_login_email',

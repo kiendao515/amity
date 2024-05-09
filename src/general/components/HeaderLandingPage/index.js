@@ -78,14 +78,14 @@ function HeaderLandingPage(props) {
             }
         },
         validationSchema: Yup.object({
-            password: Yup.string().trim().required("Bạn chưa nhập mật khẩu"),
+            password: Yup.string().trim().required("You have not entered your password"),
             newPassword: Yup.string()
-                .required("Bạn chưa nhập mật khẩu")
-                .min(6, "Mật khẩu phải chứa ít nhất 6 kí tự")
-                .matches(/^\S*$/, "Mật khẩu không được chứa khoảng trắng"),
+                .required("You have not entered your password")
+                .min(6, "Password phải chứa ít nhất 6 kí tự")
+                .matches(/^\S*$/, "Password không được chứa khoảng trắng"),
             confirmPassword: Yup.string()
-                .required("Bạn chưa xác nhận mật khẩu")
-                .oneOf([Yup.ref("newPassword"), null], "Mật khẩu không khớp"),
+                .required("Bạn chưa xác nhậnpassword")
+                .oneOf([Yup.ref("newPassword"), null], "Password không khớp"),
         }),
     });
 
@@ -104,11 +104,11 @@ function HeaderLandingPage(props) {
                     ></i> */}
                     <LogoIcon className="ms-sm-2" />
                     <div className="d-none d-sm-flex ms-2 text-black">
-                        Code<div className="fw-bolder">Helper</div>
+                        <div className="fw-bolder">Amity</div>
                     </div>
                 </NavLink>
             )}
-            <div className='d-flex flex-fill justify-content-end'>
+            {/* <div className='d-flex flex-fill justify-content-end'>
                 {menu && (
                     <div className='HeaderLandingPageNav d-none d-md-flex align-items-center justify-content-end'>
                         <a href='#home' className='HeaderLandingPageNavItem'>
@@ -143,7 +143,7 @@ function HeaderLandingPage(props) {
                         </button>
                     </div>
                 )}
-            </div>
+            </div> */}
 
             {!loggedIn && (
                 <div>
@@ -153,12 +153,12 @@ function HeaderLandingPage(props) {
                             <NavLink to='/sign-up'>
                                 <button type='button' className='ButtonPrimary'>
                                     <i className='far fa-user-plus me-2 text-white'></i>
-                                    Đăng ký
+                                    Sign up
                                 </button>
                             </NavLink>
                             <NavLink to='/sign-in'>
                                 <button type='button' className='ButtonCancel ms-3'>
-                                    Đăng nhập
+                                    Login
                                 </button>
                             </NavLink>
                         </div>
@@ -211,12 +211,12 @@ function HeaderLandingPage(props) {
                                     <li className='border-bottom-0 py-4'>
                                         <NavLink to='/sign-up'>
                                             <button type='button' className='ButtonPrimary py-2 px-7'>
-                                                Đăng ký
+                                                Sign up
                                             </button>
                                         </NavLink>
                                         <NavLink to='/sign-in'>
                                             <button type='button' className='ButtonCancel py-2 ms-3'>
-                                                Đăng nhập
+                                                Login
                                             </button>
                                         </NavLink>
                                     </li>
@@ -268,7 +268,7 @@ function HeaderLandingPage(props) {
                                         className='dropdown-item'
                                         href='#'
                                         onClick={() => setShowChangePasswordModal(true)}>
-                                        Đổi mật khẩu
+                                        Đổipassword
                                     </a>
                                 </li>
                                 <li>
@@ -343,7 +343,7 @@ function HeaderLandingPage(props) {
                                         className='dropdownMenuItem'
                                         onClick={() => setShowChangePasswordModal(true)}>
                                         <i className='far fa-unlock-alt mr-4'></i>
-                                        Đổi mật khẩu
+                                        Đổipassword
                                     </NavLink>
                                 </li>
                                 <li className='border-bottom-0'>
@@ -374,7 +374,7 @@ function HeaderLandingPage(props) {
                 show={showChangePasswordModal}
                 onClose={() => setShowChangePasswordModal(false)}
                 icon='fad fa-user-lock text-danger'
-                title='Đổi mật khẩu'
+                title='Đổipassword'
                 close={false}
                 onExecute={formik.handleSubmit}>
                 <form className='w-100' onSubmit={formik.handleSubmit}>
@@ -384,8 +384,8 @@ function HeaderLandingPage(props) {
                                 require={true}
                                 type='password'
                                 name='password'
-                                placeholder='Nhập mật khẩu cũ...'
-                                label='Mật khẩu cũ'
+                                placeholder='Enter old password ...'
+                                label='Old password'
                                 fieldHelper={formik.getFieldHelpers("password")}
                                 fieldProps={formik.getFieldProps("password")}
                                 fieldMeta={formik.getFieldMeta("password")}
@@ -396,8 +396,8 @@ function HeaderLandingPage(props) {
                                 require={true}
                                 type='password'
                                 name='newPassword'
-                                placeholder='Nhập mật khẩu mới...'
-                                label='Mật khẩu mới'
+                                placeholder='Enter new password ...'
+                                label='New password'
                                 fieldHelper={formik.getFieldHelpers("newPassword")}
                                 fieldProps={formik.getFieldProps("newPassword")}
                                 fieldMeta={formik.getFieldMeta("newPassword")}
@@ -408,8 +408,8 @@ function HeaderLandingPage(props) {
                                 require={true}
                                 type='password'
                                 name='confirmPassword'
-                                placeholder='Nhập lại mật khẩu mới...'
-                                label='Nhập lại mật khẩu mới'
+                                placeholder='Nhập lạipassword mới...'
+                                label='Nhập lạipassword mới'
                                 fieldHelper={formik.getFieldHelpers("confirmPassword")}
                                 fieldProps={formik.getFieldProps("confirmPassword")}
                                 fieldMeta={formik.getFieldMeta("confirmPassword")}

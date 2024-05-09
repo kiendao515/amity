@@ -164,7 +164,7 @@ const authSlice = createSlice({
         [thunkRequestToResetPassword.fulfilled]: (state, action) => {
             const { result } = action.payload;
             if (result === "success") {
-                ToastHelper.showSuccess("Mật khẩu mới đã được gửi tới email của bạn. Vui lòng kiểm tra hòm thư (bao gồm cả hòm thư rác).")
+                ToastHelper.showSuccess("Password mới đã được gửi tới email của bạn. Vui lòng kiểm tra hòm thư (bao gồm cả hòm thư rác).")
             }
         },
 
@@ -180,7 +180,7 @@ const authSlice = createSlice({
             state.isChangingPassword = false;
             const { result } = action.payload;
             if (result === "success") {
-                ToastHelper.showSuccess("Đổi mật khẩu thành công")
+                ToastHelper.showSuccess("Đổipassword thành công")
             }
         },
 

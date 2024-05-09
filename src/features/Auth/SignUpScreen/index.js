@@ -7,7 +7,7 @@ import AppResource from "general/constants/AppResource";
 import { useFormik } from "formik";
 import BaseTextField from "general/components/Form/BaseTextField";
 import AppButton from "general/components/AppButton";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import ToastHelper from "general/helpers/ToastHelper";
 import Utils from "general/utils/Utils";
 import { useNavigate } from "react-router-dom";
@@ -17,61 +17,75 @@ import BaseDropdown from "general/components/Form/BaseDropdown";
 import AppData from "general/constants/AppData";
 SignUpScreen.propTypes = {};
 
-const sTag = '[SignUpScreen]'
+const sTag = "[SignUpScreen]";
 
 function SignUpScreen(props) {
-    const navigate = useNavigate();
-    const formik = useFormik({
-        initialValues: {
-            fullname: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-        },
-        onSubmit: async (values) => {
-            const params = {
-                ...values
-            };
-            delete params?.confirmPassword;
-            let hashPassword = Utils.sha256(params.password);
-            params.password = hashPassword;
-            console.log(`${sTag} on submit: ${JSON.stringify(params)}`);
-            try {
-                const res = await authApi.signUp(params);
-                if (res) {
-                    localStorage.setItem(PreferenceKeys.savedEmail, values.email);
-                    localStorage.setItem(PreferenceKeys.savedPassword, /*values.password*/ '');
-                    ToastHelper.showSuccess('Đăng ký tài khoản mới thành công');
-                    navigate('/sign-in');
-                }
-            } catch (err) {
-                console.log(`${sTag} sign up account error: ${err.message}`);
-            }
-        },
-        validationSchema: Yup.object({
-            email: Yup.string().required('Bạn chưa nhập email').email('Email không hợp lệ'),
-            password: Yup.string().required('Bạn chưa nhập mật khẩu').min(6, 'Mật khẩu phải chứa ít nhất 6 kí tự').matches(/^\S*$/, 'Mật khẩu không được chứa khoảng trắng'),
-            fullname: Yup.string().required('Bạn chưa nhập họ tên'),
-            confirmPassword: Yup.string()
-            .required('Bạn chưa xác nhận mật khẩu')
-            .oneOf([Yup.ref('password'), null], 'Mật khẩu không khớp')
-        }),
-    });
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      fullname: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    onSubmit: async (values) => {
+      const params = {
+        ...values,
+      };
+      delete params?.confirmPassword;
+      let hashPassword = Utils.sha256(params.password);
+      params.password = hashPassword;
+      console.log(`${sTag} on submit: ${JSON.stringify(params)}`);
+      try {
+        const res = await authApi.signUp(params);
+        if (res) {
+          localStorage.setItem(PreferenceKeys.savedEmail, values.email);
+          localStorage.setItem(
+            PreferenceKeys.savedPassword,
+            /*values.password*/ ""
+          );
+          ToastHelper.showSuccess("Sign up tài khoản mới thành công");
+          navigate("/sign-in");
+        }
+      } catch (err) {
+        console.log(`${sTag} sign up account error: ${err.message}`);
+      }
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .required("Bạn chưa nhập email")
+        .email("Email không hợp lệ"),
+      // password: Yup.string()
+      //   .required("Bạn chưa nhập password")
+      //   .min(6, "Password phải chứa ít nhất 6 kí tự")
+      //   .matches(/^\S*$/, "Password không được chứa khoảng trắng"),
+      // fullname: Yup.string().required("Bạn chưa nhập họ tên"),
+      // confirmPassword: Yup.string()
+      //   .required("Bạn chưa xác nhậnpassword")
+      //   .oneOf([Yup.ref("password"), null], "Password không khớp"),
+    }),
+  });
 
-    function handleNavigate(url){
-        navigate(url);
-    }
-    return (
-        <div className="SignUpScreen min-vh-100">
-            <HeaderLandingPage logo={true} searchBar={false} menu={true} buttonSign={false} buttonAddQuestion={false}/>
-            <AuthContent 
-                leftTitle="Tham gia vào cộng đồng CodeHelper"
-                leftDescription="Học hỏi và thu nạp nhiều kiến thức hơn với cộng đồng của những lập trình viên vừa có tâm vừa có tầm"
-                authImage={AppResource.images.imgSignUp}
-                leftElement={(
-                   <form onSubmit={formik.handleSubmit}>
-                        <div>
-                            <div>
+  function handleNavigate(url) {
+    navigate(url);
+  }
+  return (
+    <div className="SignUpScreen min-vh-100">
+      <HeaderLandingPage
+        logo={true}
+        searchBar={false}
+        menu={true}
+        buttonSign={false}
+        buttonAddQuestion={false}
+      />
+      <AuthContent
+        leftTitle="Join the Amity community"
+        // leftDescription="Học hỏi và thu nạp nhiều kiến thức hơn với cộng đồng của những lập trình viên vừa có tâm vừa có tầm"
+        authImage={AppResource.images.imgSignUp}
+        leftElement={
+          <form onSubmit={formik.handleSubmit}>
+            <div>
+              {/* <div>
                                 <BaseTextField 
                                     require={true}
                                     name='fullname'
@@ -81,19 +95,19 @@ function SignUpScreen(props) {
                                     fieldProps={formik.getFieldProps('fullname')}
                                     fieldMeta={formik.getFieldMeta('fullname')}
                                 />
-                            </div>
-                            <div>
-                                <BaseTextField 
-                                    require={true}
-                                    name='email'
-                                    placeholder='hi@example.com'
-                                    label='Email'
-                                    fieldHelper={formik.getFieldHelpers('email')}
-                                    fieldProps={formik.getFieldProps('email')}
-                                    fieldMeta={formik.getFieldMeta('email')}
-                                />
-                            </div>
-                            <div className="row m-0">
+                            </div> */}
+              <div>
+                <BaseTextField
+                  require={true}
+                  name="email"
+                  placeholder="hi@example.com"
+                  label="Email"
+                  fieldHelper={formik.getFieldHelpers("email")}
+                  fieldProps={formik.getFieldProps("email")}
+                  fieldMeta={formik.getFieldMeta("email")}
+                />
+              </div>
+              {/* <div className="row m-0">
                                 <div className="col-6 pl-0">
                                     <BaseDropdown
                                         labelClassName="pt-0 pb-2"
@@ -126,8 +140,8 @@ function SignUpScreen(props) {
                                     require={true}
                                     type="password"
                                     name='password'
-                                    placeholder='Nhập mật khẩu...'
-                                    label='Mật khẩu'
+                                    placeholder='Enter password...'
+                                    label='Password'
                                     fieldHelper={formik.getFieldHelpers('password')}
                                     fieldProps={formik.getFieldProps('password')}
                                     fieldMeta={formik.getFieldMeta('password')}
@@ -138,25 +152,41 @@ function SignUpScreen(props) {
                                     require={true}
                                     type="password"
                                     name='confirmPassword'
-                                    placeholder='Nhập lại mật khẩu...'
-                                    label='Nhập lại mật khẩu'
+                                    placeholder='Nhập lạipassword...'
+                                    label='Nhập lạipassword'
                                     fieldHelper={formik.getFieldHelpers('confirmPassword')}
                                     fieldProps={formik.getFieldProps('confirmPassword')}
                                     fieldMeta={formik.getFieldMeta('confirmPassword')}
                                 />
                             </div>
-                            <div className="text-center font-weight-bolder cursor-pointer text-center" style={{color: AppResource.colors.featureColor}} >Quên mật khẩu ?</div>
-                            <AppButton 
-                                className="btn-orange mt-5 w-100"
-                                text="Đăng ký"
-                            />
-                            <div className="text-center mt-5">Bạn đã có tài khoản CodeHelper? <span onClick={()=>handleNavigate('/sign-in')} className="cursor-pointer" style={{color: AppResource.colors.featureColor, textDecoration: "underline"}}>Đăng nhập</span></div>
-                        </div>
-                   </form>
-                )}
-            />
-        </div>
-    );
+                            <div className="text-center font-weight-bolder cursor-pointer text-center" style={{color: AppResource.colors.featureColor}} >Forgot password ?</div> */}
+              <AppButton
+                className="btn-orange mt-5 w-100"
+                text="Sign up"
+                // onClick={() => {
+                //   formik.handleSubmit();
+                //   debugger
+                // }}
+              />
+              <div className="text-center mt-5">
+                You already have an Amity account?{" "}
+                <span
+                  onClick={() => handleNavigate("/sign-in")}
+                  className="cursor-pointer"
+                  style={{
+                    color: AppResource.colors.featureColor,
+                    textDecoration: "underline",
+                  }}
+                >
+                  Login
+                </span>
+              </div>
+            </div>
+          </form>
+        }
+      />
+    </div>
+  );
 }
 
 export default SignUpScreen;

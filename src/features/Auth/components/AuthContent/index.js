@@ -12,9 +12,9 @@ AuthContent.propTypes = {
 
 AuthContent.defaultProps = {
     leftElement: (<div></div>),
-    leftTitle: 'CodeHelper',
-    leftDescription: 'Hơn 15000 câu hỏi đang chờ đợi sự trợ giúp của bạn',
-    authImage: AppResource.images.imgSignIn
+    leftTitle: 'Amity',
+    // leftDescription: 'Hơn 15000 câu hỏi đang chờ đợi sự trợ giúp của bạn',
+    authImage: AppResource.images.imgSignUp
 }
 
 function AuthContent(props) {
