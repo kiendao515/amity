@@ -28,12 +28,15 @@ axiosClient.interceptors.request.use(async (config) => {
 })
 
 axiosClient.interceptors.response.use((response) => {
+    // debugger
+    // console.log(response);
     if (response && response.data) {
         return response.data;
     }
 
     return response;
 }, (error) => {
+    debugger
     console.log(`${sTag} - ${error}`);
     let errorMessage = null;
     const response = error.response;
@@ -53,9 +56,9 @@ axiosClient.interceptors.response.use((response) => {
         //     }
         // }
         const { result, message } = response.data;
-        if(result === 'failed'){
+        // if(result === 'failed'){
           errorMessage = message
-        }
+        // }
     }
     if (errorMessage) {
         ToastHelper.showError(errorMessage);
