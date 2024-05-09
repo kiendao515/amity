@@ -16,6 +16,15 @@ export const thunkSignIn = createAsyncThunk(
     }
 );
 
+export const thunkActivate = createAsyncThunk(
+    "auth/activate",
+    async (params, thunkApi) => {
+        const res = await authApi.activate(params);
+        console.log(res);
+        return res;
+    }
+);
+
 export const thunkGetAccountInfor = createAsyncThunk(
     "account/get-account-infor",
     async (params, thunkApi) => {
@@ -91,24 +100,25 @@ const authSlice = createSlice({
         },
 
         [thunkSignIn.fulfilled]: (state, action) => {
-            state.isSigningIn = false;
-            const { account } = action.payload;
-            state.loggedIn = true;
-            state.currentAccount = account;
-            const { accessToken, expirationDateToken } = account;
-            if (accessToken) {
-                localStorage.setItem(PreferenceKeys.accessToken, accessToken);
-                // localStorage.setItem(
-                //   PreferenceKeys.accessTokenExpired,
-                //   expirationDateToken
-                // );
-                updateAxiosAccessToken(accessToken);
-            }
+            // state.isSigningIn = false;
+            // const { account } = action.payload;
+            // state.loggedIn = true;
+            // state.currentAccount = account;
+            // const { accessToken, expirationDateToken } = account;
+            // if (accessToken) {
+            //     localStorage.setItem(PreferenceKeys.accessToken, accessToken);
+            //     // localStorage.setItem(
+            //     //   PreferenceKeys.accessTokenExpired,
+            //     //   expirationDateToken
+            //     // );
+            //     updateAxiosAccessToken(accessToken);
+            // }
             // const { email, password } = account;
             // if (email && password) {
             //   WebsocketHelper.login(email, password);
             // }
         },
+        
         //get current account infor
         [thunkGetAccountInfor.pending]: (state, action) => {
             state.isGettingInfor = true;
@@ -180,7 +190,7 @@ const authSlice = createSlice({
             state.isChangingPassword = false;
             const { result } = action.payload;
             if (result === "success") {
-                ToastHelper.showSuccess("Đổipassword thành công")
+                ToastHelper.showSuccess("Đổi password thành công")
             }
         },
 

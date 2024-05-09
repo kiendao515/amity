@@ -9,7 +9,12 @@ const authApi = {
 
     //sign up
     signUp: (params) => {
-        const url = '/auth/sign-up';
+        const url = '/auth/signup';
+        return axiosClient.post(url, params);
+    },
+
+    activate: (params) => {
+        const url = '/auth/activate';
         return axiosClient.post(url, params);
     },
 

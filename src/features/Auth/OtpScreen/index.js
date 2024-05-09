@@ -17,11 +17,12 @@ import { useDispatch } from "react-redux";
 import { thunkSignIn } from "app/authSlice";
 import UserHelper from "general/helpers/UserHelper";
 import axios from "axios";
-SignInScreen.propTypes = {};
+import authApi from "api/authApi";
+OtpScreen.propTypes = {};
 
-const sTag = "[SignInScreen]";
+const sTag = "[OtpScreen]";
 
-function SignInScreen(props) {
+function OtpScreen(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,18 +30,18 @@ function SignInScreen(props) {
     initialValues: {
       email: "",
       password: "",
+      otpCode: "",
     },
     onSubmit: async (values) => {
       const params = { ...values };
-      debugger
       let inputPassword = params.password;
       params.password = Utils.sha256(inputPassword);
       try {
-        const res = unwrapResult(await dispatch(thunkSignIn(params)));
+        const res = await authApi.activate(params);
         if (res) {
           const displayName = UserHelper.getDisplayName(res.account);
-          ToastHelper.showSuccess(`Login success`);
-          navigate("/question");
+          ToastHelper.showSuccess(`Activate success`);
+          // navigate("/");
         }
       } catch (error) {
         console.log(`${sTag} loggin error: ${error.message}`);
@@ -55,6 +56,10 @@ function SignInScreen(props) {
       password: Yup.string()
         .trim()
         .required("You have not entered your password yet"),
+
+      otpCode: Yup.string()
+        .trim()
+        .required("You have not entered your OTP yet"),
     }),
   });
 
@@ -63,7 +68,7 @@ function SignInScreen(props) {
   }
 
   return (
-    <div className="SignInScreen min-vh-100 bg-light">
+    <div className="OtpScreen min-vh-100 bg-light">
       {/* Header */}
       <HeaderLandingPage
         logo={true}
@@ -103,6 +108,15 @@ function SignInScreen(props) {
                 />
               </div>
 
+              <BaseTextField
+                name="otpCode"
+                placeholder="Enter OTP code..."
+                label="OTP code"
+                fieldHelper={formik.getFieldHelpers("otpCode")}
+                fieldProps={formik.getFieldProps("otpCode")}
+                fieldMeta={formik.getFieldMeta("otpCode")}
+              />
+
               <div
                 className="text-center font-weight-bolder cursor-pointer text-center"
                 onClick={() => handleNavigate("/request-to-reset-pass")}
@@ -134,4 +148,4 @@ function SignInScreen(props) {
   );
 }
 
-export default SignInScreen;
+export default OtpScreen;

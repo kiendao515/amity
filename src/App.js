@@ -20,6 +20,7 @@ import Question from "features/Question";
 import Tag from "features/TagScreen";
 import Account from "features/Account";
 import { injectStore } from "general/helpers/WebSocketClientHelper";
+import OtpScreen from "features/Auth/OtpScreen";
 // import Admin from "Admin";
 
 // Load BS
@@ -44,87 +45,96 @@ require("bootstrap/dist/js/bootstrap.min");
 const sTag = "[App]";
 
 function App() {
-    // MARK: --- Hooks ---
-    useEffect(() => {
-        console.log(`${sTag} did load`);
-        injectStore(store);
+  // MARK: --- Hooks ---
+  useEffect(() => {
+    console.log(`${sTag} did load`);
+    injectStore(store);
 
-        return () => {
-            console.log(`${sTag} will dismiss`);
-        };
-    }, []);
+    return () => {
+      console.log(`${sTag} will dismiss`);
+    };
+  }, []);
 
-    return (
-        <>
-            {/* Router */}
-            {/* <BrowserRouter> */}
-            <BrowserRouter>
-                {/* Suspense */}
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Routes>
-                        {/* Landing Page */}
-                        <Route path='' element={<LandingPage />} />
+  return (
+    <>
+      {/* Router */}
+      {/* <BrowserRouter> */}
+      <BrowserRouter>
+        {/* Suspense */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            {/* Landing Page */}
+            <Route path="" element={<LandingPage />} />
 
-                        <Route path='users/*' element={<UserListScreen />} />
+            <Route path="users/*" element={<UserListScreen />} />
 
-                        {/* Account */}
-                        <Route
-                            path='account/:accountId/*'
-                            element={
-                                <PrivateRoute>
-                                    <Account />
-                                </PrivateRoute>
-                            }
-                        />
-                        {/* Sign in */}
-                        <Route
-                            path='/sign-in'
-                            element={
-                                <GuestRoute>
-                                    <SignInScreen />
-                                </GuestRoute>
-                            }
-                        />
-                        {/* Sign up */}
-                        <Route
-                            path='/sign-up'
-                            element={
-                                <GuestRoute>
-                                    <SignUpScreen />
-                                </GuestRoute>
-                            }
-                        />
-                        {/* Request to reset pass */}
-                        <Route
-                            path='/request-to-reset-pass'
-                            element={
-                                <GuestRoute>
-                                    <RequestToResetPass />
-                                </GuestRoute>
-                            }
-                        />
+            {/* Account */}
+            <Route
+              path="account/:accountId/*"
+              element={
+                <PrivateRoute>
+                  <Account />
+                </PrivateRoute>
+              }
+            />
+            {/* Sign in */}
+            <Route
+              path="/sign-in"
+              element={
+                <GuestRoute>
+                  <SignInScreen />
+                </GuestRoute>
+              }
+            />
+            {/* Sign up */}
+            <Route
+              path="/sign-up"
+              element={
+                <GuestRoute>
+                  <SignUpScreen />
+                </GuestRoute>
+              }
+            />
 
-                        {/* Question */}
-                        <Route path='question/*' element={<Question />} />
+            <Route
+              path="/otp"
+              element={
+                <GuestRoute>
+                  <OtpScreen />
+                </GuestRoute>
+              }
+            />
+            {/* Request to reset pass */}
+            <Route
+              path="/request-to-reset-pass"
+              element={
+                <GuestRoute>
+                  <RequestToResetPass />
+                </GuestRoute>
+              }
+            />
 
-                        {/* tag */}
-                        <Route path='tag/*' element={<Tag />} />
-                        {/* Not Found */}
-                        <Route path='*' element={<AppNotFound />} />
-                    </Routes>
-                </Suspense>
-            </BrowserRouter>
-            {/* </BrowserRouter> */}
+            {/* Question */}
+            <Route path="question/*" element={<Question />} />
 
-            {/* App Dialog */}
-            <AppDialog />
-            {/* Toast */}
-            <AppToast />
-            {/* Listener */}
-            {/* Account Listener */}
-            <AccountListener />
-        </>
-    );
+            {/* tag */}
+            <Route path="tag/*" element={<Tag />} />
+            {/* Not Found */}
+            <Route path="*" element={<AppNotFound />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+      {/* </BrowserRouter> */}
+
+      {/* App Dialog */}
+      <AppDialog />
+      {/* Toast */}
+      <AppToast />
+      {/* Listener */}
+      {/* Account Listener */}
+      <AccountListener />
+    </>
+  );
 }
 
 export default App;

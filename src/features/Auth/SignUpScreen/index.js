@@ -45,7 +45,7 @@ function SignUpScreen(props) {
             /*values.password*/ ""
           );
           ToastHelper.showSuccess("Sign up tài khoản mới thành công");
-          navigate("/sign-in");
+          navigate("/otp");
         }
       } catch (err) {
         console.log(`${sTag} sign up account error: ${err.message}`);
