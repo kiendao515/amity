@@ -33,7 +33,7 @@ function SignUpScreen(props) {
         ...values,
       };
       delete params?.confirmPassword;
-      let hashPassword = Utils.sha256(params.password);
+      // let hashPassword = Utils.sha256(params.password);
       params.password = hashPassword;
       console.log(`${sTag} on submit: ${JSON.stringify(params)}`);
       try {

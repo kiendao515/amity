@@ -35,7 +35,7 @@ function SignInScreen(props) {
       const params = { ...values };
       
       let inputPassword = params.password;
-      params.password = Utils.sha256(inputPassword);
+      // params.password = Utils.sha256(inputPassword);
       try {
         const res = unwrapResult(await dispatch(thunkSignIn(params)));
         if (res) {

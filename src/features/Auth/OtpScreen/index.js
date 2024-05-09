@@ -35,7 +35,7 @@ function OtpScreen(props) {
     onSubmit: async (values) => {
       const params = { ...values };
       let inputPassword = params.password;
-      params.password = Utils.sha256(inputPassword);
+      // params.password = Utils.sha256(inputPassword);
       try {
         const res = await authApi.activate(params);
         if (res) {
