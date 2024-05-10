@@ -58,9 +58,9 @@ function HeaderLandingPage(props) {
         onSubmit: async (values, { resetForm }) => {
             const params = { ...values };
             let inputPassword = params.password;
-            params.password = Utils.sha256(inputPassword);
+            // params.password = Utils.sha256(inputPassword);
             delete params?.confirmPassword;
-            let hashPassword = Utils.sha256(params.newPassword);
+            // let hashPassword = Utils.sha256(params.newPassword);
             params.newPassword = hashPassword;
             // console.log(` on submit: ${JSON.stringify(params)}`);
             try {
